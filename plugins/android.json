@@ -1,0 +1,56 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-autostart": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-googlemaps": {
+      "API_KEY_FOR_ANDROID": "AIzaSyCGjAXdK1cXpL2O6qNxI5d_fr7pMxLdzPs",
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "de.appplant.cordova.plugin.local-notification": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-app-event": {
+      "PACKAGE_NAME": "com.f2rhero.studio.sholah"
+    }
+  }
+}

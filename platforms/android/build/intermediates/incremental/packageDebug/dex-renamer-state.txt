@@ -1,0 +1,4 @@
+#Mon May 21 14:30:37 WIB 2018
+base.0=/Volumes/DATA/PROJECT/Ionic/abc_project/platforms/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Volumes/DATA/PROJECT/Ionic/abc_project/platforms/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

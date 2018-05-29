@@ -1,0 +1,53 @@
+<!--
+  Generated template for the MosquePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header style="height:50%">
+  <ion-navbar color="newcolor">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Near Mosque</ion-title>
+  </ion-navbar>
+  <div #map id="map"></div>
+</ion-header>
+
+<!-- <ion-content padding>
+  <div style="width:100%;height: 100%;" id="map_canvas"></div> 
+</ion-content> -->
+
+<ion-content no-padding>
+  
+  <!-- <div id="map_canvas"></div>  -->
+  
+  <br>
+  <!-- <div #infoMap id="infoMap"></div>  -->
+  <div style="width : 100% ;height: 60%">
+      <ion-list>
+        <ion-item>
+          <ion-label>Distance</ion-label>
+          <ion-select [(ngModel)]="distanceVal" (ionChange)="loadGoogleMap(distanceVal)">
+            <ion-option value="500">500</ion-option>
+            <ion-option value="1000">1000</ion-option>
+            <ion-option value="2000">2000</ion-option>
+            <ion-option value="3000">3000</ion-option>
+            <ion-option value="5000">5000</ion-option>
+            <ion-option value="10000">10 km</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item (click)="addMarker(mylocation)">
+            <ion-icon name="locate" item-start></ion-icon>
+            <p>My Location </p>
+        </ion-item>
+        <ion-item-divider *ngFor="let place of places" (click)="addMarkerMosque(place.geometry.location)">
+            <p>{{place.name}}<br>
+            <small>{{place.vicinity}}</small>
+            </p>
+            <button ion-button item-end (click)="openMapsInSysApp(place.geometry.location)">Open Maps</button>
+        </ion-item-divider>
+      </ion-list>
+  </div>
+  
+  </ion-content>

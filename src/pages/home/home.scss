@@ -1,0 +1,68 @@
+.ios, .md {
+    page-home {
+        ion-content {
+            
+        }
+        ion-item {
+            background-color: rgba(0, 0, 0, 0);
+            color: #ffe;
+            font-weight: 600;
+        }
+        ion-footer {
+            background-color: rgba(0, 0, 0, 0);
+            color: #ffe;
+        }
+        ion-toolbar {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #ffe;
+        }
+        ion-card{
+            background-color: rgba(0, 0, 0, 0);
+            color: #ffe;
+            font-weight: 600;
+        }
+        .light{
+            background:url('../assets/imgs/background_light.jpg') no-repeat fixed center; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+        }
+        .night{
+            background:url('../assets/imgs/background_night.jpg') no-repeat fixed center; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+        }
+        .bold{
+            font-weight: 1000;
+            color: #6dacda;
+        }
+        .normal{
+            font-weight: normal;
+            color: green;
+        }
+        .hide {
+            display: none;
+        }
+        .wi {
+            font-size: 50px;
+        }
+        .content-prayer{
+            color: #fff;
+            background: rgba(255, 255, 255, 0.20);
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            left: 0;
+            position: fixed;
+            margin-left: 20px;
+            margin-right: 20px;
+            right: 0;
+            z-index: 2;
+            padding: 0 10px;
+        }
+        .current-weathers{
+         height: 30%;   
+        }
+    }
+}

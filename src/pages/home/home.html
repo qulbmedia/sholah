@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar color="newcolor">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Prayers Time</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content no-padding [ngClass]="{'light': daySeasonNow == 'light', 'night': daySeasonNow == 'night'}">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div id="current-weather">
+        <h3 text-center><b style="font-size:20px;">{{weatherCity}}</b></h3>
+        <ion-grid>
+                <ion-row>
+                    <ion-col text-center>
+                        <div class="icon"><img src="{{weatherIcon}}" style="width:70%;height:70%;" alt=""></div>
+                    </ion-col>
+                    <ion-col text-left>
+                        
+                        <ion-col col-6 style="font-size:24px;">
+                            {{weatherTempNow}}&deg; 
+                        </ion-col>
+                        <br>
+                        <span style="font-size:12px;">{{weatherDesc}}</span>
+                    </ion-col>
+                    <ion-col text-left>
+                        
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        <ion-col>
+                <!-- {{weatherTempNow}}&deg;  -->
+        </ion-col>
+    </div>
+    <div padding class='content-prayer'>
+        <br>
+        <ion-list no-lines>
+            <ion-item [class.bold]="selectSubhNow" (click)="doSetNotif(prayerSubuh,'Subuh')">
+                <div item-left>Subuh</div>
+                <div item-right>{{ prayerSubuh }}</div>
+            </ion-item>
+            <ion-item [class.bold]="selectDuhrNow" (click)="doSetNotif(prayerDzhuhur,'Dzuhur')">
+                <div item-left>Dzuhr</div>
+                <div item-right>{{ prayerDzhuhur }}</div>
+            </ion-item>
+            <ion-item [class.bold]="selectAshrNow" (click)="doSetNotif(prayerAshar,'Ashar')">
+                <div item-left>Ashr</div>
+                <div item-right>{{ prayerAshar }}</div>
+            </ion-item>
+            <ion-item [class.bold]="selectMagrNow" (click)="doSetNotif(prayerMaghrib,'Maghrib')">
+                <div item-left>Maghrib</div>
+                <div item-right>{{ prayerMaghrib }}</div>
+            </ion-item>
+            <ion-item [class.bold]="selectIsyaNow" (click)="doSetNotif(prayerIsya,'Isya')">
+                <div item-left>Isya</div>
+                <div item-right>{{ prayerIsya }}</div>
+            </ion-item>
+        </ion-list>
+    </div>
+
+</ion-content>
+<ion-footer>
+    <ion-item no-lines>
+        {{gregorianToday}}<br>
+		<small>{{hijriToday}}</small>
+        <div item-right style="padding-right:10px;" [class.hide]="!showPrayNowStatus">
+            <small>{{ hoursRemaining }}</small>
+            <h1>
+                {{ nextSHolahName }}
+            </h1>
+        </div>
+    </ion-item>
+</ion-footer>

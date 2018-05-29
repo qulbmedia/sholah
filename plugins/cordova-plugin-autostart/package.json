@@ -1,0 +1,60 @@
+{
+  "_from": "cordova-plugin-autostart",
+  "_id": "cordova-plugin-autostart@2.1.0",
+  "_inBundle": false,
+  "_integrity": "sha1-gthbtNi+VjjLp2tusPPpKAImGz4=",
+  "_location": "/cordova-plugin-autostart",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-autostart",
+    "name": "cordova-plugin-autostart",
+    "escapedName": "cordova-plugin-autostart",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-autostart/-/cordova-plugin-autostart-2.1.0.tgz",
+  "_shasum": "82d85bb4d8be5638cba76b6eb0f3e92802261b3e",
+  "_spec": "cordova-plugin-autostart",
+  "_where": "D:\\PROJECT\\Ionic\\abc_project",
+  "author": {
+    "name": "Toni Korin"
+  },
+  "bugs": {
+    "url": "https://github.com/ToniKorin/cordova-plugin-autostart/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-autostart",
+    "platforms": [
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "\r\n        The application will be automatically started after the every boot and the automatic update of your application. \r\n        You can enable or disable the autostart function in your app.\r\n    ",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "homepage": "https://github.com/ToniKorin/cordova-plugin-autostart",
+  "keywords": [
+    "autostart",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "Apache 2.0",
+  "name": "cordova-plugin-autostart",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToniKorin/cordova-plugin-autostart.git"
+  },
+  "version": "2.1.0"
+}

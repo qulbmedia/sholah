@@ -1,0 +1,55 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-googlemaps": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "de.appplant.cordova.plugin.local-notification": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-autostart": {
+      "PACKAGE_NAME": "Sholah"
+    },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "Sholah"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-app-event": {
+      "PACKAGE_NAME": "Sholah"
+    }
+  }
+}
