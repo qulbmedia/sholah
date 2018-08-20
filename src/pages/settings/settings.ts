@@ -23,6 +23,7 @@ export class SettingsPage {
   ashrNotif:any;
   maghribNotif:any;
   ishaNotif:any;
+  unitsLoad:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public LocalNotifications: LocalNotifications) {
     console.log("Toggled: "+ this.subhNotif); 
   }
@@ -85,6 +86,14 @@ export class SettingsPage {
       this.ishaNotif = ishaNotifVal;
     }
 
+
+    var unitsLoad = localStorage.getItem('unitDegree');
+    if(unitsLoad == null || unitsLoad == undefined){
+      this.unitsLoad = "C";
+    }else{
+      this.unitsLoad = unitsLoad;
+    }
+
   }
   public notifySubh() {
     console.log("Toggled: "+ this.subhNotif);
@@ -140,6 +149,12 @@ export class SettingsPage {
     localStorage.setItem('prayAsarMethod',item);
     var setNow = localStorage.getItem('prayAsarMethod');
     console.log('item is set : '+setNow);
+  }
+
+  updateUnits(item){
+    localStorage.setItem('unitDegree',item);
+    var unitDegree = localStorage.getItem('unitDegree');
+    console.log('item is set : '+unitDegree);
   }
 
   

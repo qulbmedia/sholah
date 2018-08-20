@@ -31,6 +31,7 @@ export class HomePage {
   longLatExist          : string;
   today                 : Date;
   hoursRemaining        : any;
+  timesRemaining        : any;
   public timer          : Timer;
   interval              : any;
   daySeasonNow          : any;
@@ -80,6 +81,7 @@ export class HomePage {
   days: any[];
   chosenHours: number;
   chosenMinutes: number;
+  unitWeather = localStorage.getItem("unitDegree");
 
   public loader = this.loadingCtrl.create({
     content: 'loading...'
@@ -92,6 +94,9 @@ export class HomePage {
     //   unitFormat  : "metric",
     //   lang        : "en"
     // }
+    if(this.unitWeather == undefined || this.unitWeather == null){
+      this.unitWeather = "C";
+    }
   }
   ionViewDidLoad(){
     this.weatherIcon  = "assets/icon/weather/no-weather.png";
@@ -167,10 +172,18 @@ export class HomePage {
   getLocationDetail(latitide,longitude){
     console.log("latitide : "+latitide+" AND longitude  : "+longitude);
     if(latitide != 0 && longitude != 0){
+      
+      if(this.unitWeather == "F"){
+        var unitFormat = "imperial"
+      }else if(this.unitWeather == "C") {
+        var unitFormat = "metric";
+      }else if(this.unitWeather == "K") {
+        var unitFormat = "";
+      }
       var options = {
         apikey      : "c41672d1fb5c256039a28c7debd84bcd",
         city        : {"geo":[{"lat":latitide,"lon":longitude}]},
-        unitFormat  : "metric",
+        unitFormat  : unitFormat,
         lang        : "en"
       }
       this.getWeather(options);
@@ -465,7 +478,7 @@ export class HomePage {
 
   // COUNTDOWN TIMER -----
   startTimer(timeNextPray,nextSholah){
-    this.nextSHolahName = "to "+nextSholah;
+    this.nextSHolahName = nextSholah;
     this.interval = setInterval(() => { 
       var now       = new Date().getTime();
       var distance  = timeNextPray - now;   // Find the distance between now an the count down date
@@ -490,6 +503,7 @@ export class HomePage {
         clearInterval(this.interval);
       }else{
         this.hoursRemaining = hours + "h " + minutes + "m " + seconds + "s ";
+        this.timesRemaining = hours + "h " + minutes + "m ";
       }
     }, 1000);
 
@@ -557,7 +571,7 @@ export class HomePage {
     for(var i=0; i<7; i++){
       var dayWeek       = new Date(new Date().setDate(new Date().getDate() + i));
       var dayWeekConv   = Math.round((dayWeek).getTime() / 1000);;
-      console.log("cobaTime :: "+dayWeekConv);
+      // console.log("cobaTime :: "+dayWeekConv);
       //aaa
       this.services.prayerTimeForNotif(lat,lng,dayWeekConv).then((prayerTimes) => {
         if(prayerTimes != null || prayerTimes != undefined){
@@ -611,7 +625,7 @@ export class HomePage {
     // this.showAlert(title,message);
   }
   setNotificationTime(dayDate,sholahTime,id,sholahName){
-    console.log("subhNotifVal.toString()");
+    // console.log("subhNotifVal.toString()");
     var NotificationTime  = new Date(parseInt(dayDate)*1000);
     let strs              : any[];
 
@@ -621,11 +635,11 @@ export class HomePage {
     NotificationTime.setHours(strs[0]);
     NotificationTime.setMinutes(strs[1]);
     NotificationTime.setSeconds(strs[2]);
-    console.log(NotificationTime);
+    // console.log(NotificationTime);
     // console.log(id);
 
     if(this.statusDev ==  "true"){
-      console.log("this development ,  cannot create notifications");
+      // console.log("this development ,  cannot create notifications");
     }else{
       if(new Date() > NotificationTime){
         // action this

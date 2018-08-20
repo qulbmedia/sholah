@@ -18,7 +18,7 @@ export class OpenWeatherMapProvider {
   public weatherDescription: string;
 
   city: any = "";
-  unitFormat: string = "metric";
+  unitFormat: string = "";
   lang: string = "en";
 
   constructor(private http: Http) {
@@ -37,7 +37,19 @@ export class OpenWeatherMapProvider {
     var url: string; 
 
     if(options.unitFormat) {
-      this.unitFormat = options.unitFormat;
+      
+      var unitWeather = localStorage.getItem("unitDegree");
+      console.log("unitWeather >> "+unitWeather)
+      if(unitWeather == "F"){
+        this.unitFormat = "imperial"
+      }else if(unitWeather == "C") {
+        this.unitFormat = "metric";
+      }else if(unitWeather == "K") {
+        this.unitFormat = "";
+      }else{
+        this.unitFormat = "metric";
+      }
+
     }
     if(options.lang) {
       this.lang = options.lang;
@@ -45,7 +57,8 @@ export class OpenWeatherMapProvider {
     if(options.city) {
       paramsCity = this.formCityQuery(options.city);
     }
-    url = this.apiURl+paramsCity+'&units='+options.unitFormat+'&lang='+this.lang+'&appid='+options.apikey;
+    url = this.apiURl+paramsCity+'&units='+this.unitFormat+'&lang='+this.lang+'&appid='+options.apikey;
+    console.log(">>>>>>> "+url);
 
     return new Promise(resolve => {
       this.http.get(url)

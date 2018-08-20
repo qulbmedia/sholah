@@ -41,7 +41,7 @@
             <ion-icon name="locate" item-start></ion-icon>
             <p>My Location </p>
         </ion-item>
-        <ion-item-divider *ngFor="let place of places" (click)="addMarkerMosque(place.geometry.location)">
+        <ion-item-divider *ngFor="let place of places" (click)="addMarker(place.geometry.location)">
             <p>{{place.name}}<br>
             <small>{{place.vicinity}}</small>
             </p>

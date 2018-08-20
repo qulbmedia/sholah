@@ -16,7 +16,21 @@
 
 <ion-content>
   <ion-item-group>
-    <ion-item-divider color="light">Payer Time</ion-item-divider>
+      <ion-item-divider color="light">Weather</ion-item-divider>
+      <ion-item>
+  
+        <ion-label>Units</ion-label>
+        <ion-select [(ngModel)]="unitsLoad" (ionChange)="updateUnits($event)">
+          <ion-option value="F"> Fahrenheit</ion-option>
+          <ion-option value="C"> Celcius</ion-option>
+          <ion-option value="K"> Kelvin</ion-option>
+        </ion-select>
+        
+      </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">Prayer Time</ion-item-divider>
     <ion-item>
 
       <ion-label>Prayer Time Method</ion-label>
@@ -39,6 +53,7 @@
 
     </ion-item>
   </ion-item-group>
+
   <ion-item-group>
     <ion-item-divider color="light">Notification</ion-item-divider>
     <ion-item>

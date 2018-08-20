@@ -25,9 +25,11 @@ export class MosquePage {
   // map:GoogleMap;
   distanceVal : string;
   map         : any;
-  lat         : any; lang:any;
+  lat         : any; 
+  long        : any;
   mylocation  : any;
   places      : Array<any> ; 
+  infowindow: any;
   constructor(public platform: Platform , private geolocation: Geolocation, public navCtrl: NavController , private loadingCtrl: LoadingController , public alert: AlertController, private diagnostic: Diagnostic) {
     
   }
@@ -39,6 +41,10 @@ export class MosquePage {
     // setTimeout(() => {
     //   console.log(this.abc.nativeElement.innerText);
     // }, 1000);
+
+    this.platform.resume.subscribe(() => {
+      this.loadGoogleMap(1000);
+    });
   }
   loadGoogleMap(radius){
     var radiusval = parseInt(radius);
@@ -64,21 +70,27 @@ export class MosquePage {
   getLocationDetail(radius){
     this.geolocation.getCurrentPosition().then((position) => {
       console.log(position);
-      var lat           = position.coords.latitude;
-      var long          = position.coords.longitude;
-      let latLng        = new google.maps.LatLng(lat, long);
+      this.lat           = position.coords.latitude;
+      this.long          = position.coords.longitude;
+      let latLng        = new google.maps.LatLng(this.lat, this.long );
       this.mylocation   = latLng;
-      this.addMarker(latLng,radius);
+      this.addMarker(latLng,radius,position);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
   }
-  addMarker(latlng,radius){
-    console.log(latlng);
+  addMarker(latlng,radius,position){
+    // console.log(latlng);
+
+    if(latlng.equals(this.mylocation)){
+      console.log("sama");
+    }else{
+      console.log("beda");
+    }
     if(radius <= 1000){
       var mapOptions = {
         center: latlng,
-        zoom: 15,
+        zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
     }
@@ -96,133 +108,102 @@ export class MosquePage {
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
     }
-    else{
+    else if(radius > 4000){
       var mapOptions = {
         center: latlng,
         zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
     }
-    // this.map    = GoogleMaps.create('map_canvas', mapOptions);
-    this.map    = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    let marker  = new google.maps.Marker({
-      map       : this.map,
-      animation : google.maps.Animation.DROP,
-      // icon      :'assets/icon/maps/mymarker.png',
-      position  : this.map.getCenter()
-    });
-    // let content = "<p>This is your current position</p>";          
-    // let infoWindow = new google.maps.InfoWindow({
-    //   content: content
-    // });
-    // google.maps.event.addListener(marker, 'click', () => {
-    //   infoWindow.open(this.map, marker);
-    // });
-    this.getRestaurants(latlng,radius).then((results : Array<any>)=>{
-        this.places = results;
-        console.log(results);
-        for(let i = 0 ;i < results.length ; i++) {
-            this.createMarker(results[i],latlng);
-        }
-    },(status)=>console.log(status));
-  }
-  addMarkerMosque(latlng){
-    console.log(latlng);
-    var typeMarker = {
-      url: "http://maps.google.com/mapfiles/kml/paddle/grn-circle.png", // url
-      scaledSize: new google.maps.Size(32, 32), // scaled size
-      origin: new google.maps.Point(0,0), // origin
-      anchor: new google.maps.Point(0, 32) // anchor
-    };
-    let mapOptions = {
-      center: latlng,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+    else{
+      var mapOptions = {
+        center: latlng,
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
     }
+
     this.map    = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    let marker = new google.maps.Marker({
-        map       : this.map,
-        draggable : true,
-        icon      : typeMarker,
-        animation : google.maps.Animation.DROP,
-        position  : latlng
-    }); 
-    var infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(this.map);
-
-  }
-  getRestaurants(latLng, radius){
-      var service   = new google.maps.places.PlacesService(this.map);
-      let request   = {
-          location : latLng,
-          radius : radius ,
-          types: ["mosque"]
-      };
-      return new Promise((resolve,reject)=>{
-          service.nearbySearch(request,function(results,status){
-              if(status === google.maps.places.PlacesServiceStatus.OK){
-                  resolve(results);    
-              }else{
-                  reject(status);
-              }
-          }); 
-      });
-  
-  }
-  createMarker(places,latlng){
-
-    console.log(places);
-    // console.log(place.geometry.location);
-    var typeMarker;
-    var you       = 'http://maps.google.com/mapfiles/kml/paddle/red-circle.png';
-    // var mosque    = "https://maps.gstatic.com/mapfiles/place_api/icons/worship_islam-71.png";
-    var mosque    = "http://maps.google.com/mapfiles/kml/paddle/grn-circle.png";
-
-    console.log(places.geometry.location+" = "+latlng);
-
-    console.log(places.types);
-    if(places.types[0] != "mosque"){      
-      typeMarker = {
-        url: you, // url
-        scaledSize: new google.maps.Size(32, 32), // scaled size
-        origin: new google.maps.Point(0,0), // origin
-        anchor: new google.maps.Point(0, 32) // anchor
-      };
-      console.log(typeMarker);
-    }else{
-      typeMarker = {
-        url: mosque, // url
-        scaledSize: new google.maps.Size(32, 32), // scaled size
-        origin: new google.maps.Point(0,0), // origin
-        anchor: new google.maps.Point(0, 32) // anchor
-      };
-      console.log(typeMarker);
-    }
-    console.log("end icon : "+typeMarker);
-    let marker = new google.maps.Marker({
-        map       : this.map,
-        icon      : typeMarker,
-        animation : google.maps.Animation.DROP,
-        position  : places.geometry.location
-    }); 
-    var infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(this.map);
-    infowindow.close(this.map, this);
     
-    service.getDetails({
-      placeId: places.place_id
-    }, function(place, status) {
+    // ============================
+
+    this.infowindow   = new google.maps.InfoWindow();
+    var service       = new google.maps.places.PlacesService(this.map);
+    service.nearbySearch({
+      location: latlng,
+      radius: 1000,
+      types: ["mosque"]
+    }, (results,status) => {
+      this.places = results;
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(
-            '<div><strong>' + place.name + '</strong><br>' +
-            place.formatted_address + '</div><br>'
-          );
-          infowindow.open(this.map, this);
-        });
+        for (var i = 0; i < results.length; i++) {
+          this.createMarker( results[i] , this.infowindow,latlng );
+        }
       }
     });
+  }
+  createMarker(places , infowindow, latlng){
+    // console.log(places.geometry.location);
+    if(places.geometry.location.equals(this.mylocation)){
+      console.log(places.geometry.location+" === "+this.mylocation);
+
+      var meIcon = {
+        url: "https://www.iconsdb.com/icons/download/royal-blue/marker-512.png", // url
+        scaledSize: new google.maps.Size(48, 48), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 32) // anchor
+      };
+      var markerself = new google.maps.Marker({
+        map       : this.map,
+        icon      : meIcon,
+        position  : this.mylocation
+      });
+      google.maps.event.addListener(markerself, 'click', function() {
+        this.infowindow.setContent(places.name);
+        this.infowindow.open(this.map, this);
+      });
+
+    }else{
+      var mosIcon = {
+        url: "https://www.iconsdb.com/icons/download/green/marker-512.png", // url
+        scaledSize: new google.maps.Size(48, 48), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 32) // anchor
+      };
+      var marker = new google.maps.Marker({
+        map       : this.map,
+        icon      : mosIcon,
+        position  : places.geometry.location
+      });
+  
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(places.name);
+        infowindow.open(this.map, this);
+      });
+    }
+    // ============================
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(this.map);
+
+    var onChangeHandler = function() {
+      this.calculateAndDisplayRoute(directionsService, directionsDisplay, latlng);
+    };
       
+  }
+  calculateAndDisplayRoute(directionsService, directionsDisplay, latlng) {
+    directionsService.route({
+      origin: this.mylocation ,
+      destination: latlng,
+      travelMode: 'DRIVING'
+    }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+        console.log(response);
+      } else {
+        console.log('Directions request failed due to ' + status);
+      }
+    });
   }
   openMapsInSysApp(position){
     if (this.platform.is('ios')) {
